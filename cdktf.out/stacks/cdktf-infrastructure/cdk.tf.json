@@ -1,0 +1,50 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "cdktf-infrastructure",
+      "version": "0.17.1"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "aws": [
+      {
+        "region": "us-east-1"
+      }
+    ]
+  },
+  "resource": {
+    "aws_s3_bucket": {
+      "example-s3-bucket": {
+        "//": {
+          "metadata": {
+            "path": "cdktf-infrastructure/example-s3-bucket",
+            "uniqueId": "example-s3-bucket"
+          }
+        },
+        "bucket": "example-cdktf-infra-cna128zasde",
+        "tags": {
+          "project": "example"
+        },
+        "versioning": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/Users/uhughlu/repos/lucas-personal/cdktf-infrastructure/terraform.cdktf-infrastructure.tfstate"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.7.0"
+      }
+    }
+  }
+}

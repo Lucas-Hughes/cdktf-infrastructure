@@ -1,0 +1,26 @@
+stages:
+  - tfsec
+  - checkov
+
+tfsec:
+  stage: tfsec
+  image: alpine:latest
+  before_script:
+    - apk add --update curl git go bash coreutils
+    - curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+  script:
+    - cd ./go/
+    - go run converter.go -root=../cdktf.out/stacks/ -output=../terraformOutput/
+    - tfsec -s ../terraformOutput/
+
+checkov:
+  stage: checkov
+  image: alpine:latest
+  before_script:
+    - apk add --update curl python3 py3-pip git go 
+    - pip3 install -q checkov
+  script:
+    - cd ./go/
+    - go run converter.go -root=../cdktf.out/stacks/ -output=../terraformOutput/
+    - checkov -d ../terraformOutput/ 
+
